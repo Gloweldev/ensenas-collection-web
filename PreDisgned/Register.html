@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EnSeñas AI - Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6324eb",
+                        "primary-hover": "#521dc4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                        "surface-dark": "#1e182d",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #161121; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2f2447; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #413261; 
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #a492c8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .input-glow:focus-within {
+            box-shadow: 0 0 0 2px rgba(99, 36, 235, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-zinc-200 dark:border-[#2f2447] px-6 lg:px-10 py-4 bg-white dark:bg-[#161121] z-50">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white cursor-pointer select-none">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-[32px]">interpreter_mode</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">EnSeñas AI</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden sm:block text-sm text-slate-600 dark:text-slate-400 font-medium">Already have an account?</span>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-slate-200 dark:bg-[#2f2447] hover:dark:bg-[#3d2f5c] text-slate-900 dark:text-white text-sm font-bold transition-colors">
+<span class="truncate">Sign In</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<div class="w-full max-w-[480px] z-10">
+<!-- Header Section -->
+<div class="text-center mb-8">
+<h1 class="text-3xl md:text-4xl font-bold leading-tight mb-3 gradient-text">Join the Mission</h1>
+<p class="text-slate-600 dark:text-slate-300 text-base font-body font-normal">
+                    Help us bridge the communication gap. <br class="hidden sm:block"/>Create your EnSeñas AI account today.
+                </p>
+</div>
+<!-- Card Container -->
+<div class="bg-white dark:bg-zinc-900/40 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 md:p-8 shadow-xl">
+<!-- Social Auth Buttons -->
+<div class="flex flex-col sm:flex-row gap-3 mb-6">
+<button class="flex-1 flex items-center justify-center gap-3 h-12 px-4 rounded-lg bg-white dark:bg-[#221d2e] border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 hover:dark:bg-zinc-800 transition-colors group">
+<img alt="Google Logo" class="w-5 h-5" data-alt="Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKB4VwcGj_Pv4jnPCymekIVDfQyTUXrF6wAQrskMhUTQgWD017DkTe7_7ZNunp5ImQrB6hiXiAZeMoEpjPKEM7Ny01lvobIdXZLorOtjw1vatiBhktotm0MlhJLHZYkBSXk5Q-_woUYXt4lQ-mUNdB5eObZ_QNQerCmserTsNEsRsXvdrzANw6SZgDIJM-wLT8w-vZoLrwxgkwfFPbFbEY1N8pS3ejr8N2rXAisBkPNYZFP4RXh6DPFZ0ubeqyZXI6BfJryOeD3S8"/>
+<span class="text-sm font-bold text-slate-700 dark:text-white group-hover:text-slate-900">Google</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-3 h-12 px-4 rounded-lg bg-white dark:bg-[#221d2e] border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 hover:dark:bg-zinc-800 transition-colors group">
+<img alt="Facebook Logo" class="w-5 h-5" data-alt="Facebook logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOUtk0bzjKHZqmb10pkqyeg0zUml6Hy0aW4GYAtLlNO9yjkx6ouCX5LHDpUd03VolzUCFKMKxdZbzxHybYDRTA8blE5UPo8bx5JAXnCg06ZWJBB6tuKhhxLMXSd2vPQK81j-XK9Op8xJ8HJDBFMdkt_9PTaVCY-iIK4yNW88PusWoV_JaXOpfJbLCSeLeX0-SHjNP2u4wDk5TKGdZvqIYZ23RBdIZetu7XU0vpzyaqLi_eJVl2eYg08zF5zmlAG0uDU74sA2eWOgM"/>
+<span class="text-sm font-bold text-slate-700 dark:text-white group-hover:text-slate-900">Facebook</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="relative flex py-2 items-center mb-6">
+<div class="flex-grow border-t border-zinc-300 dark:border-zinc-700"></div>
+<span class="flex-shrink-0 mx-4 text-xs font-bold text-zinc-400 uppercase tracking-widest">Or with email</span>
+<div class="flex-grow border-t border-zinc-300 dark:border-zinc-700"></div>
+</div>
+<!-- Registration Form -->
+<form class="flex flex-col gap-4">
+<!-- Name Input -->
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-200 ml-1" for="fullname">Full Name</label>
+<div class="relative input-glow rounded-lg transition-all duration-200">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-zinc-400 text-[20px]">person</span>
+</span>
+<input class="w-full h-12 pl-10 pr-4 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body text-base transition-colors" id="fullname" placeholder="e.g. Alex Morgan" type="text"/>
+</div>
+</div>
+<!-- Email Input -->
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-200 ml-1" for="email">Email Address</label>
+<div class="relative input-glow rounded-lg transition-all duration-200">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-zinc-400 text-[20px]">mail</span>
+</span>
+<input class="w-full h-12 pl-10 pr-4 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body text-base transition-colors" id="email" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-200 ml-1" for="password">Password</label>
+<div class="relative input-glow rounded-lg transition-all duration-200">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-zinc-400 text-[20px]">lock</span>
+</span>
+<input class="w-full h-12 pl-10 pr-12 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-zinc-700 rounded-lg text-slate-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body text-base transition-colors" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="mt-4 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-primary-hover text-white text-base font-bold shadow-lg shadow-primary/25 transition-all active:scale-[0.98]" type="submit">
+                        Create Account
+                    </button>
+</form>
+<!-- Data Usage Footnote -->
+<div class="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-zinc-500 text-[18px] mt-0.5 flex-shrink-0">info</span>
+<p class="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-body">
+                            By registering, you agree to our <a class="text-primary hover:underline" href="#">Terms of Service</a>. 
+                            Please note that non-sensitive interaction data may be anonymized and used to train our sign language recognition AI models to improve accessibility for everyone.
+                        </p>
+</div>
+</div>
+</div>
+<p class="text-center mt-6 text-sm text-slate-500 dark:text-zinc-500">
+                © 2023 EnSeñas AI. Accessibility first.
+            </p>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EnSeñas AI - Sobre el Proyecto</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6324eb",
+                        "primary-glow": "#8b5cf6",
+                        "accent": "#0ea5e9",
+                        "background-dark": "#09090b", "glass-border": "rgba(255, 255, 255, 0.08)",
+                        "glass-bg": "rgba(9, 9, 11, 0.6)",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                    backgroundImage: {
+                        'hero-gradient': 'linear-gradient(135deg, rgba(99, 36, 235, 0.1) 0%, rgba(9, 9, 11, 0.4) 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 30px rgba(99, 36, 235, 0.4);
+        }
+
+        .ambient-light {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .grid-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .scanner-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #6324eb;
+            box-shadow: 0 0 10px #6324eb, 0 0 20px #8b5cf6;
+            animation: scan 3s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-zinc-950 text-white font-display overflow-x-hidden selection:bg-primary/30">
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 grid-bg opacity-30"></div>
+        <div class="ambient-light bg-primary w-[600px] h-[600px] -top-32 left-1/2 -translate-x-1/2 animate-pulse"
+            style="animation-duration: 10s;"></div>
+        <div class="ambient-light bg-accent w-[400px] h-[400px] bottom-0 right-0 opacity-10"></div>
+    </div>
+    <div class="relative flex min-h-screen flex-col z-10">
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-glass-border bg-zinc-950/80 backdrop-blur-md px-4 py-3 md:px-10">
+            <div class="flex items-center gap-4 text-white">
+                <div class="size-8 text-primary">
+                    <span class="material-symbols-outlined text-[32px]">gesture</span>
+                </div>
+                <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">EnSeñas AI</h2>
+            </div>
+            <div class="hidden md:flex flex-1 justify-center gap-8">
+                <nav class="flex items-center gap-6 rounded-full bg-white/5 px-6 py-2 border border-white/5">
+                    <a class="text-white/70 text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="#">Tablero</a>
+                    <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors border-b border-primary"
+                        href="#">Misión</a>
+                    <a class="text-white/70 text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="#">Ranking</a>
+                    <a class="text-white/70 text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="#">Perfil</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="hidden sm:flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white text-sm font-bold leading-normal">
+                    <span class="truncate flex items-center gap-2">
+                        Volver al Tablero
+                    </span>
+                </button>
+                <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white/10"
+                    data-alt="User profile picture placeholder"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgKqfgfNrkj5wmIpaKCfINpxEdg51DWcj7Jz8isMmXsJoylaLMFVzq62DixzsfyA-HGV8vQ2PWIUt23yafw-lDRLzM90CloHujc2jYJiXaOthc7_s8N3HQt-kElnDAlyIR3c2D4ECznQvAM-X13Fr_s8pnBZbKbBZExd8BqCKW2kzCwxwMQyw0auwoUJX2GI_GVHRURk0D50wbsuOoR7vfa05InN0mQetEtkh__5Fo9ZGlHIqHVpRQfLdRCAMKwBA2BVWXxG17d3o");'>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 flex flex-col items-center py-12 px-4 md:px-8 lg:px-24">
+            <div class="w-full max-w-6xl flex flex-col gap-16">
+                <div class="flex justify-start w-full">
+                    <a class="group flex items-center gap-2 text-zinc-400 hover:text-primary transition-colors text-sm font-medium uppercase tracking-wider"
+                        href="#">
+                        <span
+                            class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                        Volver a Misiones
+                    </a>
+                </div>
+                <div class="flex flex-col items-center text-center gap-6 relative">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary-glow text-xs font-bold uppercase tracking-widest mb-2">
+                        Manifiesto del Proyecto v1.0
+                    </div>
+                    <h1
+                        class="text-5xl md:text-7xl font-bold tracking-tighter text-white glow-text max-w-4xl mx-auto leading-[1.1]">
+                        La Misión de <br />
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">EnSeñas
+                            AI</span>
+                    </h1>
+                    <p class="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                        Estamos construyendo la próxima generación de tecnología de asistencia para cerrar la brecha de
+                        comunicación, impulsada por inteligencia artificial y colaboración colectiva.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 gap-8">
+                    <div
+                        class="glass-panel rounded-[2rem] p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="flex flex-col gap-6 order-2 lg:order-1">
+                            <div
+                                class="size-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20 mb-2">
+                                <span class="material-symbols-outlined text-[28px]">error_med</span>
+                            </div>
+                            <h2 class="text-3xl font-bold text-white">El "Desierto de Datos" <br /><span
+                                    class="text-zinc-400">y la Desigualdad</span></h2>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Los modelos actuales de IA para Procesamiento de Lenguaje Natural (NLP) carecen de datos
+                                de calidad en Lengua de Señas Mexicana (LSM). Los datasets existentes están fragmentados
+                                y carecen de diversidad en iluminación, ángulos y tonos de piel.
+                            </p>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Este "Desierto de Datos" impide la creación de traductores fiables en tiempo real,
+                                perpetuando la brecha digital para millones de personas sordas.
+                            </p>
+                        </div>
+                        <div
+                            class="order-1 lg:order-2 bg-zinc-900/50 rounded-2xl p-8 border border-white/5 relative overflow-hidden">
+                            <div class="flex flex-col gap-6 relative z-10">
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex justify-between text-xs font-mono text-zinc-500 uppercase">
+                                        <span>Inglés (NLP)</span>
+                                        <span>300B+ Tokens</span>
+                                    </div>
+                                    <div class="h-8 w-full bg-zinc-800 rounded-lg overflow-hidden relative">
+                                        <div class="absolute inset-y-0 left-0 bg-zinc-600 w-full"></div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex justify-between text-xs font-mono text-zinc-500 uppercase">
+                                        <span>Español (NLP)</span>
+                                        <span>150B+ Tokens</span>
+                                    </div>
+                                    <div class="h-8 w-full bg-zinc-800 rounded-lg overflow-hidden relative">
+                                        <div class="absolute inset-y-0 left-0 bg-zinc-600 w-[80%]"></div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div
+                                        class="flex justify-between text-xs font-mono text-red-400 uppercase font-bold">
+                                        <span>LSM (Lengua de Señas)</span>
+                                        <span>&lt; 0.01B Tokens</span>
+                                    </div>
+                                    <div
+                                        class="h-8 w-full bg-zinc-800 rounded-lg overflow-hidden relative border border-red-500/30">
+                                        <div class="absolute inset-y-0 left-0 bg-red-500 w-[1%] animate-pulse"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="glass-panel rounded-[2rem] p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="relative rounded-2xl overflow-hidden aspect-video border border-primary/20 group">
+                            <div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-700"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAoszWWkSSx0XvfVMO1YKFiQQHc76E1avFptgyCJ1Tpei6GI5aJAVCJmPReS--lABTZztZXoSxGB_h6Ne-D98cSfqYzsRonKF_KV0I6SZxIj0X0QksnwqBpgHzAHzhVUOs_gTOED1dHSgmOzHHDYNfCUdu2d60OiCSC6UtL45QJlWXzH7FCRQPwHbVNIC8VuasQM2gonR-2i2qWPMrGwub8SGgaHp7baYItvtmQd_fbvVcpZ9mffFK_f4yyWQZoGjm_naS4FPi8PKE");'>
+                            </div>
+                            <div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                                <div class="flex justify-between items-start">
+                                    <div
+                                        class="bg-black/60 backdrop-blur-sm px-3 py-1 rounded border border-primary/40 text-xs font-mono text-primary-glow">
+                                        CONFIANZA: 98.4%
+                                    </div>
+                                    <span class="material-symbols-outlined text-primary/80 animate-spin"
+                                        style="font-size: 24px; animation-duration: 3s;">my_location</span>
+                                </div>
+                                <div
+                                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-primary/30 rounded-full flex items-center justify-center">
+                                    <div class="w-24 h-24 border border-white/10 rounded-full"></div>
+                                    <div class="absolute w-full h-[1px] bg-primary/40 rotate-45"></div>
+                                    <div class="absolute w-full h-[1px] bg-primary/40 -rotate-45"></div>
+                                </div>
+                                <div class="scanner-line"></div>
+                                <div class="font-mono text-xs text-primary-glow">
+                                    &gt; DETECTANDO PUNTOS CLAVE...<br />
+                                    &gt; MANO_DERECHA_DETECTADA
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <div
+                                class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 mb-2">
+                                <span class="material-symbols-outlined text-[28px]">psychology</span>
+                            </div>
+                            <h2 class="text-3xl font-bold text-white">Traducción Bidireccional <br /><span
+                                    class="text-zinc-400">Deep Tech</span></h2>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Desarrollamos traducción en tiempo real para transformar la accesibilidad en sectores
+                                críticos como Gobierno, Educación y Trabajo. Nuestra tecnología permite una comunicación
+                                fluida y bidireccional donde antes existían barreras insuperables.
+                            </p>
+                            <ul class="space-y-3 mt-2">
+                                <li class="flex items-center gap-3 text-zinc-300">
+                                    <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                                    <span>Traducción en Tiempo Real</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-zinc-300">
+                                    <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                                    <span>Validación por Visión Artificial</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-zinc-300">
+                                    <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                                    <span>Etiquetado Verificado por Comunidad</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div
+                        class="glass-panel rounded-[2rem] p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-between bg-gradient-to-r from-primary/5 to-transparent">
+                        <div class="flex flex-col gap-4 max-w-2xl">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="size-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+                                    <span class="material-symbols-outlined">science</span>
+                                </div>
+                                <h2 class="text-2xl font-bold text-white">Fase 1: Recolección y Calibración</h2>
+                            </div>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Actualmente nos encontramos en una etapa intensiva de I+D. Cada dato aportado por los
+                                usuarios se convierte en el "ADN" de nuestro modelo, permitiendo calibrar la precisión
+                                de nuestros algoritmos de visión artificial antes del despliegue masivo.
+                            </p>
+                        </div>
+                        <div class="hidden md:flex items-center gap-4">
+                            <div class="flex flex-col items-end gap-1">
+                                <span class="text-xs text-zinc-500 font-mono uppercase tracking-widest">Progreso
+                                    I+D</span>
+                                <span class="text-2xl font-bold text-white font-mono">34%</span>
+                            </div>
+                            <div class="w-32 h-2 bg-zinc-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 w-[34%] relative">
+                                    <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-panel rounded-[2rem] p-8 md:p-12 flex flex-col gap-10">
+                        <div class="text-center max-w-2xl mx-auto">
+                            <h2 class="text-3xl font-bold text-white mb-4">Cómo Funciona</h2>
+                            <p class="text-zinc-400">Un enfoque descentralizado para construir el futuro de la
+                                accesibilidad.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                            <div
+                                class="hidden md:block absolute top-12 left-[16%] right-[16%] h-[2px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent border-t border-dashed border-zinc-600 z-0">
+                            </div>
+                            <div
+                                class="relative z-10 flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-primary/30 transition-colors">
+                                <div
+                                    class="size-20 rounded-2xl bg-zinc-950 flex items-center justify-center border border-zinc-800 shadow-lg mb-2 group">
+                                    <span
+                                        class="material-symbols-outlined text-4xl text-blue-400 group-hover:scale-110 transition-transform">videocam</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">1. Contribuye</h3>
+                                <p class="text-sm text-zinc-400">Graba glosas y frases específicas asignadas por el
+                                    sistema de misiones para enriquecer el dataset.</p>
+                            </div>
+                            <div
+                                class="relative z-10 flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-primary/30 transition-colors">
+                                <div
+                                    class="size-20 rounded-2xl bg-zinc-950 flex items-center justify-center border border-zinc-800 shadow-lg mb-2 group">
+                                    <span
+                                        class="material-symbols-outlined text-4xl text-primary group-hover:scale-110 transition-transform">model_training</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">2. Entrena</h3>
+                                <p class="text-sm text-zinc-400">Nuestra canalización de Visión Computarizada procesa
+                                    los movimientos para su validación.</p>
+                            </div>
+                            <div
+                                class="relative z-10 flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-primary/30 transition-colors">
+                                <div
+                                    class="size-20 rounded-2xl bg-zinc-950 flex items-center justify-center border border-zinc-800 shadow-lg mb-2 group">
+                                    <span
+                                        class="material-symbols-outlined text-4xl text-emerald-400 group-hover:scale-110 transition-transform">public</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">3. Despliega</h3>
+                                <p class="text-sm text-zinc-400">Lanzamiento del MVP y liberación de datasets
+                                    open-source para la comunidad global.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center pb-12">
+                    <button
+                        class="group relative px-8 py-4 bg-primary text-white font-bold rounded-full overflow-hidden shadow-[0_0_20px_rgba(99,36,235,0.5)] hover:shadow-[0_0_30px_rgba(99,36,235,0.7)] transition-all">
+                        <div
+                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]">
+                        </div>
+                        <span class="relative flex items-center gap-3">
+                            Unirme a la Misión
+                            <span
+                                class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <style>
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+
+</body>
+
+</html>

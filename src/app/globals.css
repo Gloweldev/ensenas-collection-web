@@ -1,0 +1,54 @@
+@import "tw-animate-css";
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 261 27% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 263 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 261 27% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 261 27% 25%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 263 83% 53%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 261 27% 25%;
+    --input: 261 27% 20%;
+    --ring: 263 83% 53%;
+    --radius: 0.5rem;
+  }
+
+  body {
+    @apply bg-[#161121] text-white font-sans antialiased;
+    font-family: 'Space Grotesk', 'Noto Sans', sans-serif;
+  }
+
+  ::selection {
+    @apply bg-[#6324eb] text-white;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #161121;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #332a4a;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #433366;
+  }
+}

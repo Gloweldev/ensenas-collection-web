@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EnSeñas AI - Onboarding Step 2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6324eb",
+                        "primary-hover": "#4e1db8",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                        "glass-surface": "rgba(22, 17, 33, 0.7)",
+                        "glass-border": "rgba(255, 255, 255, 0.08)"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>/* Custom scrollbar for better aesthetic in dark mode */
+::-webkit-scrollbar {
+    width: 8px
+    }
+::-webkit-scrollbar-track {
+    background: #161121
+    }
+::-webkit-scrollbar-thumb {
+    background: #332b45;
+    border-radius: 4px
+    }
+/* Select arrow custom styling */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA8vArVoB1HfvuVj2WZTB1swOupQxxWpSqHLBwuF207crpZV-5d5nhdCroiI-YlEdxg-QCXnqe7-TnX8jyJySOi0M8GO5lnEOWRHrCAIzQ6yKNy83zQ-qHNycZWcHpozjold_K7jwzk2mlcApFW4SsvLrWL1TYEibGziqGa-5FmTyrX216eO6cSd10P5tY5X96xk-ll1cAqm1g7DqTCciXkeJKKaoZzHHjtRjfbFxayo-4LxGQOH5SrPyFjU46BScr38uzLcQN8Fo8);
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- Ambient Background Effects -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] mix-blend-screen opacity-40 animate-pulse"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#9d4edd]/20 rounded-full blur-[100px] mix-blend-screen opacity-30"></div>
+</div>
+<!-- Header -->
+<header class="relative z-10 w-full border-b border-glass-border bg-glass-surface backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-4xl">interpreter_mode</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">EnSeñas AI</h1>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-colors hover:bg-white/5">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span>Sign Out</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex-grow flex items-center justify-center p-6">
+<div class="w-full max-w-2xl">
+<!-- Progress Steps -->
+<div class="mb-8 px-2">
+<div class="flex justify-between items-end mb-3">
+<span class="text-white font-medium">Step 2 of 3</span>
+<span class="text-sm text-gray-400">Demographics</span>
+</div>
+<div class="h-2 w-full bg-[#2f2447] rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[66%] transition-all duration-700 ease-out shadow-[0_0_12px_rgba(99,36,235,0.6)]"></div>
+</div>
+</div>
+<!-- Glass Card Container -->
+<div class="bg-[#1e172e]/60 dark:bg-[#1e172e]/60 backdrop-blur-xl border border-glass-border rounded-2xl p-8 md:p-12 shadow-2xl">
+<!-- Card Header -->
+<div class="mb-10 text-center md:text-left">
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">Balance the dataset</h2>
+<p class="text-[#a492c8] text-lg font-light leading-relaxed max-w-xl">
+                        To help our AI recognize sign language accurately across all groups, please tell us a bit about yourself. We value data diversity.
+                    </p>
+</div>
+<!-- Form Inputs -->
+<div class="space-y-8">
+<!-- Age Input -->
+<div class="group">
+<label class="block text-sm font-medium text-gray-300 mb-2 transition-colors group-focus-within:text-primary" for="age-select">
+                            Age Range
+                        </label>
+<div class="relative">
+<select class="w-full bg-[#2a2238] border border-[#433366] text-white text-base rounded-lg focus:ring-2 focus:ring-primary focus:border-primary block p-4 placeholder-gray-500 transition-all hover:border-gray-500 cursor-pointer shadow-inner" id="age-select">
+<option disabled="" selected="" value="">Select your age bracket...</option>
+<option value="18-24">18 - 24</option>
+<option value="25-34">25 - 34</option>
+<option value="35-44">35 - 44</option>
+<option value="45-54">45 - 54</option>
+<option value="55+">55+</option>
+<option value="na">Prefer not to say</option>
+</select>
+</div>
+</div>
+<!-- Gender Input -->
+<div class="group">
+<label class="block text-sm font-medium text-gray-300 mb-2 transition-colors group-focus-within:text-primary" for="gender-select">
+                            Gender Identity
+                        </label>
+<div class="relative">
+<select class="w-full bg-[#2a2238] border border-[#433366] text-white text-base rounded-lg focus:ring-2 focus:ring-primary focus:border-primary block p-4 placeholder-gray-500 transition-all hover:border-gray-500 cursor-pointer shadow-inner" id="gender-select">
+<option disabled="" selected="" value="">Select gender...</option>
+<option value="female">Female</option>
+<option value="male">Male</option>
+<option value="non-binary">Non-binary</option>
+<option value="transgender">Transgender</option>
+<option value="other">Other</option>
+<option value="na">Prefer not to say</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-12 flex flex-col-reverse md:flex-row items-center justify-between gap-4">
+<button class="w-full md:w-auto px-8 py-3.5 rounded-lg text-sm font-bold text-gray-300 hover:text-white bg-transparent hover:bg-white/5 transition-colors duration-200">
+                        Back
+                    </button>
+<button class="w-full md:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-[0_0_20px_rgba(99,36,235,0.3)] hover:shadow-[0_0_25px_rgba(99,36,235,0.5)] transition-all duration-200 transform hover:-translate-y-0.5">
+<span>Continue</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Privacy Hint -->
+<p class="mt-6 text-center text-xs text-gray-500 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                Your data is anonymized and used solely for AI training purposes.
+            </p>
+</div>
+</main>
+</body></html>

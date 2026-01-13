@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Review &amp; Submit - EnSeñas AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#09090b", // Zinc-950 equivalent
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(63, 63, 70, 0.4);
+        }
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+        .primary-glow {
+            box-shadow: 0 0 20px rgba(19, 236, 91, 0.4);
+        }
+        .primary-glow:hover {
+            box-shadow: 0 0 30px rgba(19, 236, 91, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full border-b border-zinc-200 dark:border-zinc-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-zinc-950">
+<span class="material-symbols-outlined font-bold">gesture</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">EnSeñas <span class="text-primary italic text-lg">AI</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary underline underline-offset-8" href="#">Sessions</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Archive</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-zinc-500">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-emerald-700" data-alt="User profile avatar gradient"></div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-6">
+<a class="text-sm font-medium text-zinc-500 hover:text-primary" href="#">Recording</a>
+<span class="material-symbols-outlined text-sm text-zinc-600">chevron_right</span>
+<a class="text-sm font-medium text-zinc-500 hover:text-primary" href="#">Processing</a>
+<span class="material-symbols-outlined text-sm text-zinc-600">chevron_right</span>
+<span class="text-sm font-medium text-white px-2 py-0.5 bg-zinc-800 rounded">Review</span>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-10">
+<div class="space-y-1">
+<h2 class="text-4xl font-black tracking-tight text-white">Review &amp; Submit</h2>
+<p class="text-zinc-400 text-lg">Step 3 of 3: Quality Control — 5 recordings ready for final submission.</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg text-sm font-bold transition-all border border-zinc-700">
+<span class="material-symbols-outlined text-sm">help_outline</span>
+                Quality Guide
+            </button>
+</div>
+<!-- Video QC Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+<!-- Video Card 1 -->
+<div class="video-card group relative flex flex-col gap-3 glass-panel p-3 rounded-xl transition-all hover:border-primary/50">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-zinc-900 shadow-2xl">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Person performing sign language for Hello" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLAj5NYsvJlHBxYiqa76RseadoqA_GlcNhXXV0T3KCI7vniiN644UU-KQPaWjp8c0mEPyzuDugOlMT2KZmjBBYcDbKKCelxhGtE6VNK6b_N5qYWAKY2yRQ5MTcud2duQq_HNqNtOQUlNQgNBvsaniFqL3NjsG_ifqT1OHf0oYONg4B1FYS_HfQAK4r0T_qKtp19_ZL81D2Zsg5HlR9tVZsUUlixNP3-6T6w3uflfG8fgoPxDUXS1YOGVWxIyCujrBHGS4fUWMCFk8')"></div>
+<!-- Selection Controls -->
+<div class="absolute top-2 left-2 z-10">
+<input checked="" class="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-primary focus:ring-primary focus:ring-offset-zinc-950" type="checkbox"/>
+</div>
+<button class="absolute top-2 right-2 z-10 p-1.5 bg-zinc-950/60 hover:bg-red-500 rounded-md transition-colors text-white">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<!-- Play Overlay (Hover) -->
+<div class="play-overlay absolute inset-0 bg-zinc-950/40 flex items-center justify-center opacity-0 transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-zinc-950 primary-glow">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<p class="text-white font-bold text-base">01 - "Hello"</p>
+<div class="flex items-center justify-between text-zinc-400 text-xs mt-1">
+<span>0:04s</span>
+<span class="text-primary/80 font-medium">98% Accuracy</span>
+</div>
+</div>
+</div>
+<!-- Video Card 2 -->
+<div class="video-card group relative flex flex-col gap-3 glass-panel p-3 rounded-xl transition-all hover:border-primary/50">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-zinc-900 shadow-2xl">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Person performing sign language for Please" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOKDmn6xcOpyE7EwrP5GMG5FqDm84hwHy0p_9a8Q_RRYDRsmeyIo1RLh2nlfypY58ocGDL3I5oEUpvmIF_MgOiPz8ddmAD7eO-JTTWXbXJIKWfVdoVymUhNzjUVzuB5gFKQqBSphPz34am4KA3IiyL2Mf3hMVgu-l-Dgf71h0Pub6ZgMCCiNkavBz-QOiVHCyUwuHkycW518ofahKUzGlMlf3gshBlx6rdds4QCzIRVaG8sWgGRwTnl4Ccs27sX3d9B98gAYNAoj8')"></div>
+<div class="absolute top-2 left-2 z-10">
+<input checked="" class="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-primary focus:ring-primary focus:ring-offset-zinc-950" type="checkbox"/>
+</div>
+<button class="absolute top-2 right-2 z-10 p-1.5 bg-zinc-950/60 hover:bg-red-500 rounded-md transition-colors text-white">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="play-overlay absolute inset-0 bg-zinc-950/40 flex items-center justify-center opacity-0 transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-zinc-950 primary-glow">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<p class="text-white font-bold text-base">02 - "Please"</p>
+<div class="flex items-center justify-between text-zinc-400 text-xs mt-1">
+<span>0:03s</span>
+<span class="text-primary/80 font-medium">94% Accuracy</span>
+</div>
+</div>
+</div>
+<!-- Video Card 3 -->
+<div class="video-card group relative flex flex-col gap-3 glass-panel p-3 rounded-xl transition-all hover:border-primary/50">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-zinc-900 shadow-2xl">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Person performing sign language for Thank You" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8qJydf1kF3dbmP7BB4V69_PGqp5znLG8d0UuWXDw77Xaekr0k5H2Y2-GzjDF5N66b7R78c0he_Gt9XVvJTTYViHdGl8vvPdINDwXETw1lMRp1NCl9ReMSW-PyltzhArc7ckFsPe3AkxC9n7EEamUpILWsTEFGihHh9Cifv9Jrj7UUAShsFGTUy_vGPs4HubikC1gb222NjQOhEeLsYo2IETM9YnpN3NiiUNj_CXCkSRXX1-0UOpUE24jc5lRatU4fHb34bKUVkgU')"></div>
+<div class="absolute top-2 left-2 z-10">
+<input checked="" class="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-primary focus:ring-primary focus:ring-offset-zinc-950" type="checkbox"/>
+</div>
+<button class="absolute top-2 right-2 z-10 p-1.5 bg-zinc-950/60 hover:bg-red-500 rounded-md transition-colors text-white">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="play-overlay absolute inset-0 bg-zinc-950/40 flex items-center justify-center opacity-0 transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-zinc-950 primary-glow">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<p class="text-white font-bold text-base">03 - "Thank You"</p>
+<div class="flex items-center justify-between text-zinc-400 text-xs mt-1">
+<span>0:05s</span>
+<span class="text-primary/80 font-medium">96% Accuracy</span>
+</div>
+</div>
+</div>
+<!-- Video Card 4 -->
+<div class="video-card group relative flex flex-col gap-3 glass-panel p-3 rounded-xl transition-all hover:border-primary/50">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-zinc-900 shadow-2xl">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Person performing sign language for Help" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAB5_1saJlk2Yj1BwHANLQb6LKKrlBxDqzuy0Pc2I123d-rAmlYVjk0aB_KSIyoZIM-fLH0HVdaDkKyKiLDTIh0gmt_hrhyXedz8EfE5FsyHBt38ItMhDAAEPCsN7qFRK2hIlgD_gqI4GDde8Otx-pBzYK3CSeW8LkI7j8oQqaapp2wy1dDcSaoUoYkRjD5gZ6y8c6rXuwc9MVgvfZq4LaIl4L8eyseTFKiW_80Ify2flvpvoQq8gUY7u8Erx1BvcvUNrVevSseFwc')"></div>
+<div class="absolute top-2 left-2 z-10">
+<input checked="" class="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-primary focus:ring-primary focus:ring-offset-zinc-950" type="checkbox"/>
+</div>
+<button class="absolute top-2 right-2 z-10 p-1.5 bg-zinc-950/60 hover:bg-red-500 rounded-md transition-colors text-white">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="play-overlay absolute inset-0 bg-zinc-950/40 flex items-center justify-center opacity-0 transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-zinc-950 primary-glow">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<p class="text-white font-bold text-base">04 - "Help"</p>
+<div class="flex items-center justify-between text-zinc-400 text-xs mt-1">
+<span>0:04s</span>
+<span class="text-primary/80 font-medium">91% Accuracy</span>
+</div>
+</div>
+</div>
+<!-- Video Card 5 -->
+<div class="video-card group relative flex flex-col gap-3 glass-panel p-3 rounded-xl transition-all hover:border-primary/50">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-zinc-900 shadow-2xl">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Person performing sign language for Sorry" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDD7ZbmXjXHwiEAaWzraSZW-nGa_Hj2gtHQljidX4uRRy4LPPa45CDbMUjyze0i2rDCcBCN1H_Xe2biJRkIHCpOv0vkf_6vZZdIrajzvbAe2oF5WQ1DFZArSKXar3Ioyp7CsEoavjr06_U3u-2zAoNOP7T4C6rRHLl61nc0_cG-xcFoO9SYXZBe0Kx-YPRa6qreAqCCFZubOgMN7foTnsEKczS2jK3xXoRstSrzNjgQa0uE1JfWrlBjfXa2zFnRbSJ7-QYDUjE4my4')"></div>
+<div class="absolute top-2 left-2 z-10">
+<input checked="" class="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-primary focus:ring-primary focus:ring-offset-zinc-950" type="checkbox"/>
+</div>
+<button class="absolute top-2 right-2 z-10 p-1.5 bg-zinc-950/60 hover:bg-red-500 rounded-md transition-colors text-white">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="play-overlay absolute inset-0 bg-zinc-950/40 flex items-center justify-center opacity-0 transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-zinc-950 primary-glow">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<p class="text-white font-bold text-base">05 - "Sorry"</p>
+<div class="flex items-center justify-between text-zinc-400 text-xs mt-1">
+<span>0:03s</span>
+<span class="text-primary/80 font-medium">99% Accuracy</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Actions Bar -->
+<footer class="mt-auto bg-zinc-900/80 backdrop-blur-xl border-t border-zinc-800 py-6 px-6 sticky bottom-0 z-50">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-6 text-zinc-400">
+<div class="flex flex-col">
+<span class="text-xs uppercase tracking-widest font-semibold text-zinc-500">Selection</span>
+<p class="text-white font-medium">5 Clips Selected</p>
+</div>
+<div class="h-8 w-px bg-zinc-800"></div>
+<p class="text-sm">Hover clip to preview gesture quality.</p>
+</div>
+<div class="flex items-center gap-4 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-3 border border-zinc-700 hover:bg-zinc-800 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">refresh</span>
+                    Retake Selected
+                </button>
+<button class="flex-1 sm:flex-none px-10 py-3 bg-primary hover:bg-emerald-400 text-zinc-950 font-black rounded-lg transition-all flex items-center justify-center gap-2 primary-glow">
+<span class="material-symbols-outlined text-lg">cloud_upload</span>
+                    Submit 5 Videos
+                </button>
+</div>
+</div>
+</footer>
+</body></html>
