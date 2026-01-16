@@ -16,8 +16,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "EnSeñas AI | The Neural Translation Engine",
-    description: "Proprietary bidirectional LSM translation engine focused on zero-latency processing.",
+    title: "EnSeñas AI | The Neural Translation Engine for LSM",
+    description: "La primera IA capaz de traducir Lengua de Señas Mexicana en tiempo real. Ayúdanos a construir el futuro de la inclusión.",
+    keywords: ["LSM", "Lengua de Señas", "IA", "AI", "Traductor", "Inclusión", "México", "Deep Tech"],
+    openGraph: {
+        title: "EnSeñas AI - Decoding the Invisible Language",
+        description: "Construyendo el puente entre el silencio y la voz. Únete a la recolección de datos.",
+        type: "website",
+        images: ["/og-marketing.jpg"], // Ensure this exists or is a placeholder
+        siteName: "EnSeñas AI",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "EnSeñas AI | Neural Translation",
+        description: "La revolución de la accesibilidad comienza contigo.",
+    }
 };
 
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
