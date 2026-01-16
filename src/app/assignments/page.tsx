@@ -6,72 +6,41 @@ import MainLayout from "@/components/layout/MainLayout";
 import {
     ClipboardList,
     CheckCircle2,
-    Video,
     Camera,
-    Clock,
-    Search,
-    Filter,
     ArrowRight
 } from "lucide-react";
 import Link from "next/link";
+import { useAssignments } from "@/hooks/use-assignments";
+import { Skeleton } from "@/components/ui/skeleton";
 
-// Mock Data
-const assignments = [
-    {
-        id: "1",
-        name: "HOLA",
-        category: "Social",
-        priority: "Alta",
-        submissionCount: 0,
-        difficulty: "Fácil"
-    },
-    {
-        id: "2",
-        name: "GRACIAS",
-        category: "Social",
-        priority: "Alta",
-        submissionCount: 3,
-        difficulty: "Fácil"
-    },
-    {
-        id: "3",
-        name: "AYUDA",
-        category: "Emergencia",
-        priority: "Crítica",
-        submissionCount: 0,
-        difficulty: "Media"
-    },
-    {
-        id: "4",
-        name: "BUENOS DÍAS",
-        category: "Social",
-        priority: "Media",
-        submissionCount: 0,
-        difficulty: "Fácil"
-    },
-    {
-        id: "5",
-        name: "POR FAVOR",
-        category: "Social",
-        priority: "Alta",
-        submissionCount: 5,
-        difficulty: "Fácil"
-    },
-    {
-        id: "6",
-        name: "HOSPITAL",
-        category: "Lugares",
-        priority: "Media",
-        submissionCount: 0,
-        difficulty: "Media"
-    },
-];
+// Helper function for category display
+const getCategoryLabel = (category: string): string => {
+    const categoryMap: Record<string, string> = {
+        'social': 'Social',
+        'verb': 'Verbos',
+        'context': 'Contexto',
+        'question': 'Preguntas',
+    };
+    return categoryMap[category] || category;
+};
+
+const getCategoryColor = (category: string): string => {
+    const colorMap: Record<string, string> = {
+        'social': 'bg-blue-500/20 text-blue-400 border-blue-500/20',
+        'verb': 'bg-green-500/20 text-green-400 border-green-500/20',
+        'context': 'bg-orange-500/20 text-orange-400 border-orange-500/20',
+        'question': 'bg-purple-500/20 text-purple-400 border-purple-500/20',
+    };
+    return colorMap[category] || 'bg-emerald-500/20 text-emerald-400 border-emerald-500/20';
+};
 
 export default function AssignmentsPage() {
     const [activeTab, setActiveTab] = useState<"pending" | "completed">("pending");
+    const { assignments, isLoading } = useAssignments();
 
-    const pendingAssignments = assignments.filter(a => a.submissionCount === 0);
-    const completedAssignments = assignments.filter(a => a.submissionCount > 0);
+    // Filter assignments based on status
+    const pendingAssignments = assignments.filter(a => a.status === 'available');
+    const completedAssignments = assignments.filter(a => a.status === 'completed' || a.status === 'pending');
 
     return (
         <MainLayout>
@@ -85,7 +54,7 @@ export default function AssignmentsPage() {
                 <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-8 pb-32">
 
                     {/* Header */}
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                    <div className="flex flex-col gap-4 mb-10">
                         <div>
                             <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
                                 Asignaciones de Grabación
@@ -93,19 +62,6 @@ export default function AssignmentsPage() {
                             <p className="text-slate-400 font-light text-lg">
                                 Gestiona y expande tu contribución al dataset.
                             </p>
-                        </div>
-
-                        {/* Summary Stats */}
-                        <div className="flex items-center gap-4 bg-white/5 rounded-2xl p-2 pr-6 border border-white/5 backdrop-blur-sm">
-                            <div className="bg-[#6324eb]/20 p-3 rounded-xl">
-                                <Video className="w-5 h-5 text-[#6324eb]" />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Total Videos</span>
-                                <span className="text-white font-bold text-lg leading-none">
-                                    {assignments.reduce((acc, curr) => acc + curr.submissionCount, 0)}
-                                </span>
-                            </div>
                         </div>
                     </div>
 
@@ -115,8 +71,8 @@ export default function AssignmentsPage() {
                             <button
                                 onClick={() => setActiveTab("pending")}
                                 className={`relative flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === "pending"
-                                        ? "text-white"
-                                        : "text-slate-500 hover:text-slate-300"
+                                    ? "text-white"
+                                    : "text-slate-500 hover:text-slate-300"
                                     }`}
                             >
                                 {activeTab === "pending" && (
@@ -138,8 +94,8 @@ export default function AssignmentsPage() {
                             <button
                                 onClick={() => setActiveTab("completed")}
                                 className={`relative flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === "completed"
-                                        ? "text-white"
-                                        : "text-slate-500 hover:text-slate-300"
+                                    ? "text-white"
+                                    : "text-slate-500 hover:text-slate-300"
                                     }`}
                             >
                                 {activeTab === "completed" && (
@@ -166,7 +122,13 @@ export default function AssignmentsPage() {
                                 transition={{ duration: 0.3 }}
                                 className="min-h-[400px]"
                             >
-                                {activeTab === "pending" ? (
+                                {isLoading ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                                        {[1, 2, 3, 4, 5, 6].map((i) => (
+                                            <Skeleton key={i} className="h-48 rounded-3xl bg-white/5" />
+                                        ))}
+                                    </div>
+                                ) : activeTab === "pending" ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                                         {pendingAssignments.map((assignment) => (
                                             <div
@@ -177,17 +139,12 @@ export default function AssignmentsPage() {
                                                 <div className="flex justify-between items-start">
                                                     <div>
                                                         <div className="flex items-center gap-2 mb-2">
-                                                            <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider
-                                                                ${assignment.category === 'Emergencia' ? 'bg-red-500/20 text-red-400 border border-red-500/20' :
-                                                                    assignment.category === 'Social' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/20' :
-                                                                        'bg-emerald-500/20 text-emerald-400 border border-emerald-500/20'
-                                                                }
-                                                            `}>
-                                                                {assignment.category}
+                                                            <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider border ${getCategoryColor(assignment.category)}`}>
+                                                                {getCategoryLabel(assignment.category)}
                                                             </span>
                                                         </div>
                                                         <h3 className="text-xl font-bold text-white group-hover:text-[#6324eb] transition-colors">
-                                                            "{assignment.name}"
+                                                            {assignment.slug.replace(/_/g, ' ').toUpperCase()}
                                                         </h3>
                                                     </div>
                                                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#6324eb]/20 group-hover:scale-110 transition-all duration-300">
@@ -195,22 +152,9 @@ export default function AssignmentsPage() {
                                                     </div>
                                                 </div>
 
-                                                {/* Card Body */}
-                                                <div className="flex items-center gap-3 text-sm text-slate-400">
-                                                    <div className="flex items-center gap-1.5">
-                                                        <Filter className="w-3.5 h-3.5 opacity-70" />
-                                                        <span>{assignment.difficulty}</span>
-                                                    </div>
-                                                    <div className="w-1 h-1 rounded-full bg-slate-600" />
-                                                    <div className="flex items-center gap-1.5 ">
-                                                        <Clock className="w-3.5 h-3.5 opacity-70" />
-                                                        <span>Prioridad {assignment.priority}</span>
-                                                    </div>
-                                                </div>
-
                                                 {/* Footer Button */}
                                                 <div className="pt-2 mt-auto">
-                                                    <Link href={`/collect/${assignment.name.toLowerCase()}`} className="block">
+                                                    <Link href={`/collect/${assignment.slug}`} className="block">
                                                         <button className="w-full py-3 rounded-xl bg-white text-black font-bold text-sm tracking-wide hover:bg-[#6324eb] hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
                                                             Iniciar Captura
                                                             <ArrowRight className="w-4 h-4" />
@@ -220,7 +164,7 @@ export default function AssignmentsPage() {
                                             </div>
                                         ))}
 
-                                        {/* Empty State visual helper (mock) */}
+                                        {/* Empty State */}
                                         {pendingAssignments.length === 0 && (
                                             <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
                                                 <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
@@ -245,11 +189,11 @@ export default function AssignmentsPage() {
                                                         <CheckCircle2 className="w-6 h-6 text-emerald-500" />
                                                     </div>
                                                     <div>
-                                                        <h3 className="text-lg font-bold text-white mb-1">{assignment.name}</h3>
+                                                        <h3 className="text-lg font-bold text-white mb-1">{assignment.slug.replace(/_/g, ' ').toUpperCase()}</h3>
                                                         <p className="text-xs text-slate-400 flex items-center gap-2">
-                                                            <span className="text-emerald-400">Completado</span>
-                                                            <span className="w-1 h-1 rounded-full bg-slate-600" />
-                                                            {assignment.submissionCount} Videos Subidos
+                                                            <span className="text-emerald-400">
+                                                                {assignment.status === 'completed' ? 'Completado' : 'En Revisión'}
+                                                            </span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -258,10 +202,12 @@ export default function AssignmentsPage() {
                                                     <p className="hidden md:block text-xs text-slate-500 text-right mr-4 max-w-[200px]">
                                                         Ayuda grabando variantes con diferente ropa o luz.
                                                     </p>
-                                                    <button className="px-5 py-2.5 rounded-xl border border-white/10 text-sm font-medium text-white hover:bg-white/10 hover:border-white/30 transition-all flex items-center gap-2 whitespace-nowrap">
-                                                        <Camera className="w-4 h-4" />
-                                                        Grabar Variante
-                                                    </button>
+                                                    <Link href={`/collect/${assignment.slug}`}>
+                                                        <button className="px-5 py-2.5 rounded-xl border border-white/10 text-sm font-medium text-white hover:bg-white/10 hover:border-white/30 transition-all flex items-center gap-2 whitespace-nowrap">
+                                                            <Camera className="w-4 h-4" />
+                                                            Grabar Variante
+                                                        </button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         ))}

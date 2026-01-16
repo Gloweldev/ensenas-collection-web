@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 import OnboardingStep1 from "./OnboardingStep1";
 import OnboardingStep2 from "./OnboardingStep2";
 import OnboardingStep3 from "./OnboardingStep3";
@@ -85,16 +86,15 @@ export default function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
             <div className="flex h-full grow flex-col max-w-[1280px] mx-auto w-full px-4 sm:px-6 lg:px-8">
                 {/* Minimal Header with Logo */}
                 <header className="flex items-center justify-between py-6 z-10">
+
+
+
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="flex items-center gap-3"
                     >
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6324eb] to-[#4c1d95] flex items-center justify-center shadow-lg shadow-[#6324eb]/20">
-                            <span className="text-2xl">🤟</span>
-                        </div>
-                        <h1 className="text-xl font-bold tracking-tight text-white">EnSeñas AI</h1>
+                        <Logo width={160} height={50} />
                     </motion.div>
 
                     <motion.button

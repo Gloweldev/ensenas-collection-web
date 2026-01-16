@@ -378,7 +378,7 @@ function HowItWorksSection() {
         {
             icon: Video,
             title: "1. Contribuye",
-            description: "Graba glosas y frases específicas asignadas por el sistema de misiones para enriquecer el dataset.",
+            description: "Graba palabras y frases específicas asignadas por el sistema de misiones para enriquecer el dataset.",
             color: "text-blue-400"
         },
         {

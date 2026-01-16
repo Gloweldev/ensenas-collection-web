@@ -161,22 +161,6 @@ export default function SuccessScreen({ signName, videosSubmitted }: SuccessScre
                     </motion.div>
                 </div>
             </main>
-
-            {/* Impact Indicator - Bottom Left */}
-            <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2 }}
-                className="fixed bottom-8 left-8 hidden lg:flex items-center gap-3 bg-zinc-900/80 border border-zinc-800 rounded-full pl-2 pr-5 py-2 backdrop-blur-md"
-            >
-                <div className="size-10 rounded-full bg-[#6324eb] flex items-center justify-center">
-                    <Sparkles className="text-white w-5 h-5" />
-                </div>
-                <div className="flex flex-col">
-                    <span className="text-xs text-zinc-400 uppercase font-bold tracking-wider">Entrenamiento IA</span>
-                    <span className="text-sm font-medium text-white">{signName} precisión +0.02%</span>
-                </div>
-            </motion.div>
         </div>
     );
 }

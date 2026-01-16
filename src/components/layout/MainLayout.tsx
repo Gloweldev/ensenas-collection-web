@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
+import { Logo } from "@/components/ui/Logo";
 
 interface MainLayoutProps {
     children: ReactNode;
@@ -42,14 +43,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <div className="relative min-h-screen flex flex-col">
             {/* Top Navigation - Desktop */}
             <header
-                className="hidden md:flex sticky top-0 z-50 items-center justify-between border-b border-white/5 bg-[#161122]/80 backdrop-blur-md px-4 py-3 md:px-10"
+                className="hidden lg:flex sticky top-0 z-50 items-center justify-between border-b border-white/5 bg-[#161122]/80 backdrop-blur-md px-4 py-3 lg:px-10"
             >
-                <div className="flex items-center gap-4 text-white">
-                    <div className="text-[#6324eb]">
-                        <Hand className="w-8 h-8" />
-                    </div>
-                    <Link href="/dashboard">
-                        <h2 className="text-xl font-bold tracking-tight">EnSeñas AI</h2>
+                <div className="flex items-center gap-4 text-white ml-2">
+                    <Link href="/dashboard" className="hover:opacity-90 transition-opacity">
+                        <Logo width={140} height={40} />
                     </Link>
                 </div>
 
@@ -105,14 +103,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
             {/* Mobile Top Bar */}
             <div
-                className="md:hidden sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#161122]/80 backdrop-blur-md px-4 py-3"
+                className="lg:hidden sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#161122]/80 backdrop-blur-md px-4 py-3"
             >
-                <div className="flex items-center gap-3">
-                    <div className="text-[#6324eb]">
-                        <Hand className="w-7 h-7" />
-                    </div>
-                    <Link href="/dashboard">
-                        <h2 className="text-lg font-bold tracking-tight text-white">EnSeñas AI</h2>
+                <div className="flex items-center gap-3 ml-2">
+                    <Link href="/dashboard" className="hover:opacity-90 transition-opacity">
+                        <Logo width={120} height={35} />
                     </Link>
                 </div>
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#6324eb] to-purple-600 border-2 border-[#6324eb]/30 flex items-center justify-center text-white font-bold text-sm">
@@ -127,7 +122,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
             {/* Bottom Navigation Dock - Mobile Only */}
             <nav
-                className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe"
+                className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe"
             >
                 <div className="mx-4 mb-4 rounded-3xl border border-white/10 bg-[#161122]/95 backdrop-blur-xl shadow-2xl overflow-hidden">
                     <div className="flex items-center justify-around px-2 py-3">
