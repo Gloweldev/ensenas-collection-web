@@ -105,7 +105,7 @@ export default function Register({ onSwitchToLogin, onRegisterComplete, isTransi
                             opacity: 1,
                             x: isTransitioning ? 400 : 0
                         }}
-                        transition={{ duration: 0.6, ease: "easeInOut", delay: isTransitioning ? 0 : 0.2 }}
+                        transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1], delay: isTransitioning ? 0 : 0.2 }}
                         className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800 rounded-2xl p-6 md:p-8 shadow-xl"
                     >
                         {/* Social Auth */}

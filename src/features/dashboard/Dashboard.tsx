@@ -33,7 +33,7 @@ export default function Dashboard() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        transition={{ duration: 0.8, ease: [0, 0.71, 0.2, 1.01] }}
                         className="flex flex-col md:flex-row md:items-end justify-between gap-6"
                     >
                         <div>

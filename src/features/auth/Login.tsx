@@ -55,7 +55,7 @@ export default function Login({ onSwitchToRegister, isTransitioning = false }: L
                     x: isTransitioning ? -500 : 0,
                     opacity: isTransitioning ? 0 : 1
                 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
             >
                 {/* Background Image with Overlay */}
                 <div
@@ -94,7 +94,7 @@ export default function Login({ onSwitchToRegister, isTransitioning = false }: L
                     x: isTransitioning ? -400 : 0,
                     opacity: 1
                 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
             >
                 {/* Mobile Background */}
                 <div

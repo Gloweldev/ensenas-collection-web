@@ -16,15 +16,20 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "EnSeñas AI | The Neural Translation Engine for LSM",
+    metadataBase: new URL("https://ensenas.ai"),
+    title: {
+        default: "EnSeñas AI | The Neural Translation Engine",
+        template: "%s | EnSeñas AI"
+    },
     description: "La primera IA capaz de traducir Lengua de Señas Mexicana en tiempo real. Ayúdanos a construir el futuro de la inclusión.",
     keywords: ["LSM", "Lengua de Señas", "IA", "AI", "Traductor", "Inclusión", "México", "Deep Tech"],
     openGraph: {
         title: "EnSeñas AI - Decoding the Invisible Language",
         description: "Construyendo el puente entre el silencio y la voz. Únete a la recolección de datos.",
-        type: "website",
-        images: ["/og-marketing.jpg"], // Ensure this exists or is a placeholder
+        url: "https://ensenas.ai",
         siteName: "EnSeñas AI",
+        locale: "es_MX",
+        type: "website",
     },
     twitter: {
         card: "summary_large_image",
