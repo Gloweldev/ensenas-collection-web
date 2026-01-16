@@ -84,7 +84,7 @@ export default function OnboardingStep3({ onSelect, selectedRegional }: Onboardi
                     <motion.div
                         initial={{ width: "66%" }}
                         animate={{ width: "100%" }}
-                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        transition={{ duration: 0.7, ease: "easeOut" as const }}
                         className="h-full bg-[#6324eb] rounded-full shadow-[0_0_10px_rgba(99,36,235,0.5)]"
                     />
                 </div>

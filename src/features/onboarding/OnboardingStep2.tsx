@@ -49,7 +49,7 @@ export default function OnboardingStep2({ onDataChange, initialData }: Onboardin
                     <motion.div
                         initial={{ width: "33%" }}
                         animate={{ width: "66%" }}
-                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        transition={{ duration: 0.7, ease: "easeOut" as const }}
                         className="h-full bg-[#6324eb] rounded-full shadow-[0_0_12px_rgba(99,36,235,0.6)]"
                     />
                 </div>

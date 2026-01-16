@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { useRef } from "react";
 import {
     ArrowLeft,
@@ -17,7 +17,7 @@ import Link from "next/link";
 import MainLayout from "@/components/layout/MainLayout";
 
 // Animation variants for scroll reveal
-const fadeInUp = {
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 60 },
     visible: {
         opacity: 1,
@@ -26,7 +26,7 @@ const fadeInUp = {
     }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -202,7 +202,7 @@ function DataComparisonChart() {
                         <motion.div
                             initial={{ width: 0 }}
                             animate={isInView ? { width: dataset.width } : { width: 0 }}
-                            transition={{ duration: 1.5, delay: index * 0.2, ease: "easeOut" }}
+                            transition={{ duration: 1.5, delay: index * 0.2, ease: "easeOut" as const }}
                             className={`absolute inset-y-0 left-0 ${dataset.alert ? "bg-red-500 animate-pulse" : "bg-zinc-600"}`}
                         />
                     </div>
