@@ -14,7 +14,7 @@ import {
     ArrowRight
 } from "lucide-react";
 import Link from "next/link";
-import MainLayout from "@/components/layout/MainLayout";
+
 
 // Animation variants for scroll reveal
 const fadeInUp: Variants = {
@@ -38,55 +38,53 @@ const staggerContainer: Variants = {
 
 export default function NuestraMision() {
     return (
-        <MainLayout>
-            <div className="relative flex flex-col bg-zinc-950 min-h-screen">
-                {/* Ambient Background Effects */}
-                <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                    <div
-                        className="absolute inset-0 opacity-30"
-                        style={{
-                            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        <div className="relative flex flex-col bg-zinc-950 min-h-screen">
+            {/* Ambient Background Effects */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div
+                    className="absolute inset-0 opacity-30"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                                             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
-                            backgroundSize: "40px 40px"
-                        }}
-                    />
-                    <div
-                        className="absolute w-[600px] h-[600px] -top-32 left-1/2 -translate-x-1/2 bg-[#6324eb] rounded-full opacity-30 animate-pulse"
-                        style={{
-                            filter: "blur(100px)",
-                            animationDuration: "10s"
-                        }}
-                    />
-                    <div
-                        className="absolute w-[400px] h-[400px] bottom-0 right-0 bg-[#0ea5e9] rounded-full opacity-10"
-                        style={{ filter: "blur(100px)" }}
-                    />
-                </div>
-
-                {/* Main Content */}
-                <main className="flex-1 flex flex-col items-center py-12 px-4 md:px-8 lg:px-24 relative z-10 w-full">
-                    <div className="w-full max-w-6xl flex flex-col gap-16">
-                        {/* Hero Section */}
-                        <HeroSection />
-
-                        {/* Problem Section */}
-                        <ProblemSection />
-
-                        {/* Solution Section */}
-                        <SolutionSection />
-
-                        {/* R&D Phase Section */}
-                        <RDPhaseSection />
-
-                        {/* How It Works Section */}
-                        <HowItWorksSection />
-
-                        {/* CTA Section */}
-                        <CTASection />
-                    </div>
-                </main>
+                        backgroundSize: "40px 40px"
+                    }}
+                />
+                <div
+                    className="absolute w-[600px] h-[600px] -top-32 left-1/2 -translate-x-1/2 bg-[#6324eb] rounded-full opacity-30 animate-pulse"
+                    style={{
+                        filter: "blur(100px)",
+                        animationDuration: "10s"
+                    }}
+                />
+                <div
+                    className="absolute w-[400px] h-[400px] bottom-0 right-0 bg-[#0ea5e9] rounded-full opacity-10"
+                    style={{ filter: "blur(100px)" }}
+                />
             </div>
-        </MainLayout>
+
+            {/* Main Content */}
+            <main className="flex-1 flex flex-col items-center py-12 px-4 md:px-8 lg:px-24 relative z-10 w-full">
+                <div className="w-full max-w-6xl flex flex-col gap-16">
+                    {/* Hero Section */}
+                    <HeroSection />
+
+                    {/* Problem Section */}
+                    <ProblemSection />
+
+                    {/* Solution Section */}
+                    <SolutionSection />
+
+                    {/* R&D Phase Section */}
+                    <RDPhaseSection />
+
+                    {/* How It Works Section */}
+                    <HowItWorksSection />
+
+                    {/* CTA Section */}
+                    <CTASection />
+                </div>
+            </main>
+        </div>
     );
 }
 
