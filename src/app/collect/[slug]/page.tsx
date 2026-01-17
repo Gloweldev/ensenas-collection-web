@@ -5,6 +5,7 @@ import Webcam from "react-webcam";
 import { X, ArrowLeft, Loader2, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { getApiUrl } from '@/config/api';
 import SuccessScreen from "@/components/SuccessScreen";
 import { Logo } from "@/components/ui/Logo";
 import { BriefingPhase } from "@/components/collect/BriefingPhase";
@@ -211,7 +212,7 @@ export default function RecordingBriefPage() {
                         // Fetch the actual recording objects from API to get fresh presigned URLs
                         try {
                             const token = await user.getIdToken();
-                            const response = await fetch(`${API_BASE_URL}/recordings/my-recordings?ids=${recordingIds.join(',')}`, {
+                            const response = await fetch(getApiUrl(`/recordings/my-recordings?ids=${recordingIds.join(',')}`), {
                                 headers: {
                                     'Authorization': `Bearer ${token}`
                                 }

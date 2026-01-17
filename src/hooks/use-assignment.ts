@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/auth-context';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+import { getApiUrl } from '@/config/api';
 
 interface Assignment {
     id: number;
@@ -36,7 +35,7 @@ export function useAssignment(slug: string): UseAssignmentReturn {
                 setError(null);
 
                 const token = await user.getIdToken();
-                const response = await fetch(`${API_BASE_URL}/collect/${slug}`, {
+                const response = await fetch(getApiUrl(`/collect/${slug}`), {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',

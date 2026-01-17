@@ -1,5 +1,7 @@
 import { useAuth } from '@/context/auth-context';
 
+import { getApiUrl } from '@/config/api';
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 
 interface UploadTarget {
@@ -114,7 +116,7 @@ export async function confirmUpload(
     token: string,
     recordingIds: number[]
 ): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/recordings/confirm-upload`, {
+    const response = await fetch(getApiUrl('/recordings/confirm-upload'), {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,

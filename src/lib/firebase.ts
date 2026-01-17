@@ -13,6 +13,10 @@ const firebaseConfig = {
 // Initialize Firebase (avoid re-initialization)
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
+if (firebaseConfig.apiKey === "mock-api-key" && typeof window !== 'undefined') {
+    console.warn("⚠️  WARNING: Using MOCK Firebase API Key. Authentication will fail. Ensure NEXT_PUBLIC_FIREBASE_API_KEY is set in your environment variables.");
+}
+
 // Export auth instance with persistence
 export const auth = getAuth(app);
 

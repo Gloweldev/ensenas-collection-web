@@ -2,8 +2,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { useAuth } from '@/context/auth-context';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+import { getApiUrl } from '@/config/api';
 
 export interface StreamingRecording {
     id: string;                     // Database record ID
@@ -106,7 +105,7 @@ export function useStreamingUpload({
             ));
 
             // Get presigned URLs from backend
-            const initResponse = await fetch(`${API_BASE_URL}/recordings/upload-single`, {
+            const initResponse = await fetch(getApiUrl('/recordings/upload-single'), {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -222,7 +221,7 @@ export function useStreamingUpload({
             if (!isLocalOnly) {
                 const token = await user.getIdToken();
 
-                const response = await fetch(`${API_BASE_URL}/recordings/${recordingId}`, {
+                const response = await fetch(getApiUrl(`/recordings/${recordingId}`), {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -267,7 +266,7 @@ export function useStreamingUpload({
         try {
             const token = await user.getIdToken();
 
-            const response = await fetch(`${API_BASE_URL}/recordings/confirm-upload`, {
+            const response = await fetch(getApiUrl('/recordings/confirm-upload'), {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

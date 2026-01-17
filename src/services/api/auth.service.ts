@@ -1,9 +1,9 @@
+import { getApiUrl } from '@/config/api';
+
 /**
  * Auth API Service
  * Handles all authentication-related API calls
  */
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 /**
  * Sync user with backend database
@@ -11,8 +11,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
  */
 export const syncUserWithBackend = async (token: string) => {
     try {
-        const response = await fetch(`${API_URL}/api/v1/auth/sync`, {
-            method: 'POST',
+        const response = await fetch(getApiUrl('/auth/sync'), {
+            method: 'POST', // Assuming POST for syncing data
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
