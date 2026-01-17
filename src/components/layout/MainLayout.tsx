@@ -129,15 +129,14 @@ export default function MainLayout({ children }: MainLayoutProps) {
             <nav
                 className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe"
             >
-                <div className="mx-4 mb-4 rounded-3xl border border-white/10 bg-[#161122]/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+                <div className="mx-4 mb-4 rounded-3xl border border-white/10 bg-[#161122] shadow-2xl overflow-hidden">
                     <div className="flex items-center justify-around px-2 py-3">
                         {dockItems.map((item) => {
                             const Icon = item.icon;
                             const active = isActive(item.href);
                             return (
                                 <Link href={item.href} key={item.label} className="w-full">
-                                    <motion.button
-                                        whileTap={{ scale: 0.9 }}
+                                    <div
                                         className={`w-full flex flex-col items-center justify-center gap-1 px-2 py-2 rounded-2xl transition-all ${active
                                             ? "bg-[#6324eb]/20 text-[#6324eb]"
                                             : "text-slate-400 hover:text-white"
@@ -146,13 +145,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
                                         <Icon className={`w-5 h-5 ${active ? "drop-shadow-[0_0_8px_rgba(99,36,235,0.6)]" : ""}`} />
                                         <span className="text-[10px] font-semibold">{item.label}</span>
                                         {active && (
-                                            <motion.div
-                                                layoutId="activeTab"
+                                            <div
                                                 className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-[#6324eb] rounded-full"
-                                                transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                             />
                                         )}
-                                    </motion.button>
+                                    </div>
                                 </Link>
                             );
                         })}
