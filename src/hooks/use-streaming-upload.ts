@@ -14,6 +14,7 @@ export interface StreamingRecording {
     uploadProgress: number;
     error?: string;
     index: number;                  // Recording sequence number
+    duration?: number;              // Duration in seconds
 }
 
 interface UploadSingleResponse {

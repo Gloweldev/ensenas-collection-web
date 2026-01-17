@@ -8,6 +8,8 @@ import Link from "next/link";
 import { StreamingRecording } from "@/hooks/use-streaming-upload";
 import { VideoReviewCard } from "../VideoReviewCard";
 import { QualityGuideModal } from "./QualityGuideModal";
+import { RerecordModal } from "./RerecordModal";
+import { IncompleteSubmissionModal } from "./IncompleteSubmissionModal";
 
 type StudioState = "brief" | "countdown" | "recording" | "resting" | "complete";
 
@@ -32,6 +34,9 @@ interface StudioPhaseProps {
     onDeleteRecording?: (recordingId: string) => void;
     onSubmit?: () => void;
     onCancel?: () => void;
+    // Smart Re-record props
+    initialRepetitions?: number;
+    onSmartRerecord?: (count: number) => void;
 }
 
 export function StudioPhase({
@@ -54,8 +59,17 @@ export function StudioPhase({
     onDeleteRecording,
     onSubmit,
     onCancel,
+    initialRepetitions = 0,
+    onSmartRerecord,
 }: StudioPhaseProps) {
     const [showQualityModal, setShowQualityModal] = useState(false);
+    const [showRerecordModal, setShowRerecordModal] = useState(false);
+    const [showIncompleteModal, setShowIncompleteModal] = useState(false);
+
+    // Calculate missing videos based on initial goal
+    // If initialRepetitions is 0 (legacy/first load), fallback to current repetitions if they are higher, or just use recordings.length
+    const targetCount = initialRepetitions > 0 ? initialRepetitions : Math.max(repetitions, recordings.length);
+    const missingCount = Math.max(0, targetCount - recordings.length);
 
     return (
         <div className="relative w-full h-dvh bg-black overflow-hidden">
@@ -355,15 +369,61 @@ export function StudioPhase({
                                     </button>
                                 </div>
 
+                                {/* Modal for Re-recording */}
+                                <RerecordModal
+                                    isOpen={showRerecordModal}
+                                    onClose={() => setShowRerecordModal(false)}
+                                    missingCount={missingCount}
+                                    onConfirm={(count: number) => {
+                                        setShowRerecordModal(false);
+                                        if (onSmartRerecord) onSmartRerecord(count);
+                                    }}
+                                />
+
+                                <IncompleteSubmissionModal
+                                    isOpen={showIncompleteModal}
+                                    onClose={() => setShowIncompleteModal(false)}
+                                    missingCount={missingCount}
+                                    onRecordMissing={() => {
+                                        setShowIncompleteModal(false);
+                                        setShowRerecordModal(true);
+                                    }}
+                                    onConfirmSubmit={() => {
+                                        setShowIncompleteModal(false);
+                                        if (onSubmit) onSubmit();
+                                    }}
+                                />
+
+                                {/* Re-record Banner (If videos are missing) */}
+                                {missingCount > 0 && recordings.length > 0 && (
+                                    <div className="relative z-10 mb-12 p-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex flex-col md:flex-row items-center justify-between gap-6">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
+                                                <RotateCcw className="w-6 h-6 text-amber-500" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-bold text-white">Faltan {missingCount} video{missingCount !== 1 ? 's' : ''}</h3>
+                                                <p className="text-amber-200/80">Has eliminado grabaciones. Completa tu tarea regrabando los videos faltantes.</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setShowRerecordModal(true)}
+                                            className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl whitespace-nowrap shadow-lg shadow-amber-500/20 transition-all active:scale-[0.98]"
+                                        >
+                                            Completar Grabación
+                                        </button>
+                                    </div>
+                                )}
+
                                 {/* Video Grid */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-8">
+                                <div className="relative z-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-8">
                                     {recordings.length > 0 ? (
                                         recordings.map((recording, arrayIndex) => (
                                             <VideoReviewCard
                                                 key={recording.id}
                                                 index={arrayIndex + 1}
                                                 signName={signName}
-                                                duration={recDuration}
+                                                duration={recording.duration || recDuration}
                                                 videoUrl={recording.localBlobUrl || recording.previewUrl}
                                                 uploadProgress={recording.uploadProgress}
                                                 uploadStatus={recording.uploadStatus}
@@ -385,7 +445,14 @@ export function StudioPhase({
                                                     Has eliminado todas las grabaciones. Necesitas al menos un video válido para completar la tarea.
                                                 </p>
                                                 <button
-                                                    onClick={() => setStudioState("brief")}
+                                                    onClick={() => {
+                                                        // If all deleted, suggest re-recording initial amount or at least 1
+                                                        if (onSmartRerecord) {
+                                                            onSmartRerecord(initialRepetitions || repetitions);
+                                                        } else {
+                                                            setStudioState("brief");
+                                                        }
+                                                    }}
                                                     className="w-full px-6 py-4 bg-[#6324eb] hover:bg-[#6324eb]/90 text-white font-bold rounded-xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] shadow-xl shadow-[#6324eb]/20"
                                                 >
                                                     <RotateCcw className="w-5 h-5" />
@@ -471,19 +538,29 @@ export function StudioPhase({
                                         </button>
                                         <button
                                             onClick={() => {
-                                                if (onSubmit) {
+                                                if (missingCount > 0) {
+                                                    setShowIncompleteModal(true);
+                                                } else if (onSubmit) {
                                                     onSubmit();
                                                 } else {
                                                     setStudioState("submitted");
                                                 }
                                             }}
                                             disabled={!allCompleted || recordings.length === 0}
-                                            className="px-10 py-4 bg-[#6324eb] hover:bg-[#501ac2] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#6324eb]/20 hover:shadow-[#6324eb]/40 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex-1 md:flex-none min-w-[240px]"
+                                            className={`px-10 py-4 font-bold rounded-xl transition-all flex items-center justify-center gap-3 shadow-xl active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex-1 md:flex-none min-w-[240px] ${missingCount > 0
+                                                ? 'bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/20'
+                                                : 'bg-[#6324eb] hover:bg-[#501ac2] text-white shadow-[#6324eb]/20'
+                                                }`}
                                         >
                                             {isUploading ? (
                                                 <>
                                                     <Loader2 className="w-5 h-5 animate-spin" />
                                                     <span>Subiendo {overallProgress}%</span>
+                                                </>
+                                            ) : missingCount > 0 ? (
+                                                <>
+                                                    <AlertCircle className="w-5 h-5" />
+                                                    <span>Faltan {missingCount} Videos</span>
                                                 </>
                                             ) : allCompleted ? (
                                                 <>

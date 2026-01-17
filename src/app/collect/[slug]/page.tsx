@@ -31,6 +31,8 @@ export default function RecordingBriefPage() {
     const [recDuration, setRecDuration] = useState(3);
     const [restTime, setRestTime] = useState(2);
 
+    const [initialRepetitions, setInitialRepetitions] = useState(0);
+
     // Studio State Machine
     const [studioState, setStudioState] = useState<StudioState>("brief");
     const [countdown, setCountdown] = useState(15);
@@ -131,8 +133,19 @@ export default function RecordingBriefPage() {
 
     // Enter Studio
     const handleEnterStudio = () => {
+        setInitialRepetitions(repetitions);
         setStudioState("countdown");
         setCountdown(15);
+    };
+
+    // Smart Re-record: Re-records missing videos without clearing existing valid ones
+    const handleSmartRerecord = (count: number) => {
+        setRepetitions(count); // Set new target for this batch
+        setCurrentRep(1);
+        clearCaptures(); // Clear local captures (reset indices)
+        uploadedIndexesRef.current.clear(); // Reset upload tracking for new indices
+        setStudioState("countdown");
+        setCountdown(5); // Shorter countdown for re-record
     };
 
     // Handle delete recording - removes from MinIO and DB
@@ -172,7 +185,6 @@ export default function RecordingBriefPage() {
             clearCaptures();
             clearRecordings();
             uploadedIndexesRef.current.clear();
-            localStorage.removeItem(SESSION_KEY);
             // Navigate to dashboard
             router.push('/dashboard');
         } catch (err) {
@@ -182,87 +194,61 @@ export default function RecordingBriefPage() {
         }
     };
 
-    // Session persistence key
-    const SESSION_KEY = `ensenas_session_${slug}`;
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+    // Clean up on unmount or successful submit
+    // Note: We no longer use localStorage for session persistence
 
-    // Save recording IDs to localStorage for persistence across browser sessions
-    useEffect(() => {
-        if (recordings.length > 0 && studioState === "complete") {
-            const sessionData = {
-                recordingIds: recordings.map(r => r.id),
-                studioState: studioState,
-                timestamp: Date.now(),
-            };
-            localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-        }
-    }, [recordings, studioState, SESSION_KEY]);
-
-    // Restore session on mount if we have recordings in DB
+    // Restore session on mount if we have recordings in DB for this assignment
     useEffect(() => {
         const restoreSession = async () => {
-            const savedSession = localStorage.getItem(SESSION_KEY);
-            if (savedSession && studioState === "brief" && user) {
+            if (studioState === "brief" && user && assignment?.id) {
                 try {
-                    const { recordingIds, timestamp } = JSON.parse(savedSession);
-                    // Session reliable for 24 hours
-                    const sessionValidity = 24 * 60 * 60 * 1000;
-                    if (recordingIds && recordingIds.length > 0 && Date.now() - timestamp < sessionValidity) {
+                    const token = await user.getIdToken();
+                    // Fetch existing PENDING/UPLOADING recordings for this assignment
+                    const response = await fetch(getApiUrl(`/recordings/my-recordings?glossaryId=${assignment.id}`), {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
 
-                        // Fetch the actual recording objects from API to get fresh presigned URLs
-                        try {
-                            const token = await user.getIdToken();
-                            const response = await fetch(getApiUrl(`/recordings/my-recordings?ids=${recordingIds.join(',')}`), {
-                                headers: {
-                                    'Authorization': `Bearer ${token}`
-                                }
-                            });
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success && data.data.recordings) {
+                            const restoredRecordings: StreamingRecording[] = data.data.recordings.map((rec: any) => ({
+                                id: rec.id,
+                                startTime: 0, // Placeholder
+                                duration: rec.duration, // Restored duration
+                                status: 'completed',
+                                uploadProgress: 100,
+                                uploadStatus: 'completed',
+                                previewUrl: rec.previewUrl, // Use the presigned URL from backend
+                                s3Key: rec.s3Key
+                            }));
 
-                            if (response.ok) {
-                                const data = await response.json();
-                                if (data.success && data.data.recordings) {
-                                    const restoredRecordings: StreamingRecording[] = data.data.recordings.map((rec: any) => ({
-                                        id: rec.id,
-                                        startTime: 0, // Placeholder
-                                        duration: 0, // Placeholder
-                                        status: 'completed',
-                                        uploadProgress: 100,
-                                        uploadStatus: 'completed',
-                                        previewUrl: rec.previewUrl, // Use the presigned URL from backend
-                                        s3Key: rec.s3Key
-                                    }));
+                            if (restoredRecordings.length > 0) {
+                                console.log(`Restoring ${restoredRecordings.length} recordings from backend`);
+                                restoreRecordings(restoredRecordings);
+                                // Restore uploaded indexes tracking
+                                restoredRecordings.forEach((r, i) => uploadedIndexesRef.current.add(i));
 
-                                    if (restoredRecordings.length > 0) {
-                                        restoreRecordings(restoredRecordings);
-                                        // Restore uploaded indexes tracking
-                                        restoredRecordings.forEach((r, i) => uploadedIndexesRef.current.add(i));
+                                // We infer repetitions from the number of recordings found.
+                                // This prevents "Missing X videos" messages when user had fewer than 5.
+                                const inferredRepetitions = restoredRecordings.length;
+                                setInitialRepetitions(inferredRepetitions);
+                                setRepetitions(inferredRepetitions);
 
-                                        // Go to complete state
-                                        setStudioState("complete");
-                                        return;
-                                    }
-                                }
+                                // Go to complete state to allow review/add more
+                                setStudioState("complete");
                             }
-                        } catch (fetchErr) {
-                            console.error("Failed to fetch restored recordings:", fetchErr);
                         }
                     }
-                } catch (e) {
-                    // Invalid session data, remove it
-                    localStorage.removeItem(SESSION_KEY);
+                } catch (err) {
+                    console.error("Failed to restore session from backend:", err);
                 }
             }
         };
 
         restoreSession();
-    }, [SESSION_KEY, user]); // Run when user is available
-
-    // Clean up localStorage on successful submit
-    useEffect(() => {
-        if (studioState === "submitted") {
-            localStorage.removeItem(SESSION_KEY);
-        }
-    }, [studioState, SESSION_KEY]);
+    }, [user, assignment, studioState, restoreRecordings]);
 
     // Browser close / tab close - delete recordings via sendBeacon
     // Browser close / tab close - Just warn, don't delete to allow refresh persistence
@@ -397,6 +383,8 @@ export default function RecordingBriefPage() {
                     onSubmit={handleSubmit}
                     onCancel={handleCancel}
                     slug={slug}
+                    initialRepetitions={initialRepetitions}
+                    onSmartRerecord={handleSmartRerecord}
                 />
             </>
         );

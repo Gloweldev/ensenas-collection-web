@@ -59,7 +59,7 @@ function VideoReviewCard({
 
     return (
         <div
-            className="group relative flex flex-col gap-3 bg-white/5 border border-white/10 backdrop-blur-md p-3 rounded-xl transition-all hover:border-[#6324eb]/50"
+            className="group relative flex flex-col gap-3 bg-[#18181b] border border-white/10 p-3 rounded-xl transition-all hover:border-[#6324eb]/50 shadow-lg"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -69,12 +69,14 @@ function VideoReviewCard({
                     <video
                         ref={videoRef}
                         src={videoUrl}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover bg-black"
                         loop
                         muted
                         playsInline
+                        crossOrigin="anonymous"
                         onPlay={() => setIsPlaying(true)}
                         onPause={() => setIsPlaying(false)}
+                        onError={(e) => console.error("Video load error:", e.currentTarget.error, videoUrl)}
                     />
                 ) : (
                     // Placeholder
