@@ -7,6 +7,7 @@ import {
     LayoutDashboard,
     Trophy,
     User,
+    Users,
     Globe,
     ClipboardList
 } from "lucide-react";
@@ -33,7 +34,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
     const dockItems = [
         { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
         { icon: ClipboardList, label: "Asignaciones", href: "/assignments" },
-        { icon: Upload, label: "Upload", href: "#" },
+        { icon: Users, label: "Comunidad", href: "/community" },
         { icon: Globe, label: "Misión", href: "/nuestra-mision" },
     ];
 
@@ -75,10 +76,14 @@ export default function MainLayout({ children }: MainLayoutProps) {
                             Asignaciones
                         </Link>
                         <Link
-                            className="flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium text-slate-400 transition-all hover:bg-white/5 hover:text-white"
-                            href="#"
+                            className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold transition-all ${isActive("/community")
+                                ? "bg-[#6324eb]/20 border border-[#6324eb]/20 text-white shadow-[0_0_15px_rgba(99,36,235,0.25)] hover:bg-[#6324eb]/30"
+                                : "text-slate-400 hover:bg-white/5 hover:text-white"
+                                }`}
+                            href="/community"
                         >
-                            Community
+                            <Users className={`w-[18px] h-[18px] ${isActive("/community") ? "text-[#8b5cf6]" : ""}`} />
+                            Comunidad
                         </Link>
                         <Link
                             className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold transition-all ${isActive("/nuestra-mision")
