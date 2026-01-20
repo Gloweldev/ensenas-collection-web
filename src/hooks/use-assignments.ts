@@ -5,6 +5,7 @@ import { useAuth } from '@/context/auth-context';
 export interface Assignment {
     id: number;
     slug: string; // For URL routing: /collect/{slug}
+    word?: string; // For UI display (e.g. "Niño")
     category: string; // For UI display
     status: 'available' | 'pending' | 'completed';
 }

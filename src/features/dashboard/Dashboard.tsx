@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useDashboard } from "@/hooks/use-dashboard";
+import { capitalizeFirst } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Dashboard() {
@@ -105,7 +106,7 @@ export default function Dashboard() {
                                 <div>
                                     <h2 className="text-2xl font-bold text-white mb-2">Continúa tu Misión</h2>
                                     <p className="text-blue-200/80 mb-6 max-w-lg">
-                                        Tu siguiente palabra: <span className="font-bold text-white uppercase">{stats.nextMission.slug}</span>
+                                        Tu siguiente palabra: <span className="font-bold text-white uppercase">{capitalizeFirst(stats.nextMission.word || stats.nextMission.slug)}</span>
                                         <span className="ml-2 text-xs bg-white/10 px-2 py-1 rounded">{stats.nextMission.category}</span>
                                     </p>
                                     <Link href="/assignments">
@@ -184,7 +185,7 @@ export default function Dashboard() {
                                         </div>
                                         <div>
                                             <h4 className="text-xl font-bold text-white mb-1 group-hover:text-[#6324eb] transition-colors uppercase">
-                                                {assignment.slug.replace(/_/g, ' ')}
+                                                {capitalizeFirst(assignment.word || assignment.slug.replace(/_/g, ' '))}
                                             </h4>
                                             <p className="text-xs text-slate-400">Prioridad {assignment.priority}</p>
                                         </div>

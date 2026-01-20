@@ -14,6 +14,7 @@ import { useAssignment } from "@/hooks/use-assignment";
 import { useRecorder, VideoMetadata } from "@/hooks/use-recorder";
 import { useStreamingUpload, type StreamingRecording } from "@/hooks/use-streaming-upload";
 import { useAuth } from "@/context/auth-context";
+import { capitalizeFirst } from "@/lib/utils";
 
 type StudioState = "brief" | "countdown" | "recording" | "resting" | "complete" | "submitted";
 
@@ -21,11 +22,11 @@ export default function RecordingBriefPage() {
     const params = useParams();
     const router = useRouter();
     const slug = params.slug as string;
-    const signName = slug?.toUpperCase() || "HOLA";
-    const { user } = useAuth();
-
-    // Fetch assignment data
+    const { user } = useAuth(); // Restored
     const { assignment, isLoading, error } = useAssignment(slug);
+
+    // Prefer the explicitly defined display word ("Niño"), fallback to cleaned slug ("NINO")
+    const signName = capitalizeFirst(assignment?.word || slug?.replace(/-/g, ' ')) || "Hola";
 
     const [repetitions, setRepetitions] = useState(5);
     const [recDuration, setRecDuration] = useState(3);

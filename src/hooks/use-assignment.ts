@@ -5,6 +5,7 @@ import { getApiUrl } from '@/config/api';
 interface Assignment {
     id: number;
     slug: string;
+    word?: string;
     category: string;
     videoReferenceUrl: string | null;
     priority: number;

@@ -12,6 +12,7 @@ export interface UserProfile {
 export interface NextMission {
     id: number;
     slug: string;
+    word?: string;
     category: string;
     priority: number;
     status: string;
@@ -28,6 +29,7 @@ export interface DashboardStats {
 export interface PriorityAssignment {
     id: number;
     slug: string;
+    word?: string;
     category: string;
     priority: number;
 }

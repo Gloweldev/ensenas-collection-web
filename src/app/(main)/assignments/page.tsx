@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useAssignments } from "@/hooks/use-assignments";
+import { capitalizeFirst } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Helper function for category display
@@ -158,7 +159,7 @@ export default function AssignmentsPage() {
                                                             </span>
                                                         </div>
                                                         <h3 className="text-xl font-bold text-white group-hover:text-[#6324eb] transition-colors">
-                                                            {assignment.slug.replace(/_/g, ' ').toUpperCase()}
+                                                            {capitalizeFirst(assignment.word || assignment.slug.replace(/_/g, ' '))}
                                                         </h3>
                                                     </div>
                                                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#6324eb]/20 group-hover:scale-110 transition-all duration-300">
@@ -217,7 +218,7 @@ export default function AssignmentsPage() {
                                                         <CheckCircle2 className="w-6 h-6 text-emerald-500" />
                                                     </div>
                                                     <div>
-                                                        <h3 className="text-lg font-bold text-white mb-1">{assignment.slug.replace(/_/g, ' ').toUpperCase()}</h3>
+                                                        <h3 className="text-lg font-bold text-white mb-1">{capitalizeFirst(assignment.word || assignment.slug.replace(/_/g, ' '))}</h3>
                                                         <p className="text-xs text-slate-400 flex items-center gap-2">
                                                             <span className="text-emerald-400">
                                                                 {assignment.status === 'completed' ? 'Completado' : 'En Revisión'}
