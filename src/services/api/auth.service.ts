@@ -9,14 +9,17 @@ import { getApiUrl } from '@/config/api';
  * Sync user with backend database
  * @param token - Firebase ID token
  */
-export const syncUserWithBackend = async (token: string) => {
+export const syncUserWithBackend = async (token: string, termsAcceptedAt?: string) => {
     try {
         const response = await fetch(getApiUrl('/auth/sync'), {
-            method: 'POST', // Assuming POST for syncing data
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                termsAcceptedAt,
+            }),
         });
 
         if (!response.ok) {

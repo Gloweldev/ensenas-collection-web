@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import { Mail, Lock, User, Eye, EyeOff, Info } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
 import { Logo } from "@/components/ui/Logo";
+import { LegalModal } from "@/components/modals/legal-modal";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
 
 interface RegisterProps {
     onSwitchToLogin: () => void;
@@ -17,23 +20,35 @@ export default function Register({ onSwitchToLogin, onRegisterComplete, isTransi
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [termsAccepted, setTermsAccepted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { signInWithGoogle, signInWithFacebook } = useAuth();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!termsAccepted) {
+            toast.error("Debes aceptar los términos y condiciones para continuar.");
+            return;
+        }
+
         console.log("Register:", { fullName, email, password });
-        // TODO: Integrar con API de registro
-        // After successful registration, trigger onboarding
+        // TODO: Integrar con API de registro (Email flow needs similar update)
+        // Ensure email registration also passes termsAcceptedAt to backend
+
         if (onRegisterComplete) {
             onRegisterComplete();
         }
     };
 
     const handleGoogleRegister = async () => {
+        if (!termsAccepted) {
+            toast.error("Debes aceptar los términos y condiciones para continuar.");
+            return;
+        }
         setIsLoading(true);
         try {
-            await signInWithGoogle();
+            await signInWithGoogle(new Date().toISOString());
         } catch (error) {
             // Error is handled in auth context with toast
         } finally {
@@ -42,9 +57,13 @@ export default function Register({ onSwitchToLogin, onRegisterComplete, isTransi
     };
 
     const handleFacebookRegister = async () => {
+        if (!termsAccepted) {
+            toast.error("Debes aceptar los términos y condiciones para continuar.");
+            return;
+        }
         setIsLoading(true);
         try {
-            await signInWithFacebook();
+            await signInWithFacebook(new Date().toISOString());
         } catch (error) {
             // Error is handled in auth context with toast
         } finally {
@@ -253,11 +272,21 @@ export default function Register({ onSwitchToLogin, onRegisterComplete, isTransi
                         {/* Data Usage Footnote */}
                         <div className="mt-6 pt-6 border-t border-zinc-700/50">
                             <div className="flex items-start gap-3">
-                                <Info className="w-4 h-4 text-zinc-500 mt-0.5 flex-shrink-0" />
-                                <p className="text-xs text-zinc-400 leading-relaxed text-left">
-                                    Al registrarte, aceptas nuestros <a className="text-[#6324eb] hover:underline" href="#">Términos de Servicio</a>.
-                                    Ten en cuenta que los datos de interacción no sensibles pueden ser anonimizados.
-                                </p>
+                                <Checkbox
+                                    id="terms"
+                                    checked={termsAccepted}
+                                    onCheckedChange={(checked) => setTermsAccepted(checked as boolean)}
+                                    className="mt-1 border-zinc-500 data-[state=checked]:bg-[#6324eb] data-[state=checked]:border-[#6324eb]"
+                                />
+                                <div className="grid gap-1.5 leading-none">
+                                    <label
+                                        htmlFor="terms"
+                                        className="text-xs text-zinc-400 leading-relaxed text-left cursor-pointer select-none"
+                                    >
+                                        Declaro que soy mayor de 18 años y acepto los <LegalModal><span className="text-[#6324eb] hover:underline cursor-pointer font-bold">Términos y Condiciones</span></LegalModal>.
+                                        Ten en cuenta que los datos de interacción no sensibles pueden ser anonimizados.
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

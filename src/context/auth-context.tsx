@@ -14,13 +14,14 @@ import { useRouter, usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 import { getUserProfile, UserProfile } from '@/services/api/user.service';
 import { setCookie, getCookie, removeCookie } from '@/lib/cookies';
+import { syncUserWithBackend } from '@/services/api/auth.service';
 
 interface AuthContextType {
     user: User | null;
     userProfile: UserProfile | null;
     loading: boolean;
-    signInWithGoogle: () => Promise<void>;
-    signInWithFacebook: () => Promise<void>;
+    signInWithGoogle: (termsAcceptedAt?: string) => Promise<void>;
+    signInWithFacebook: (termsAcceptedAt?: string) => Promise<void>;
     logout: () => Promise<void>;
     refreshProfile: () => Promise<void>;
 }
@@ -114,10 +115,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return () => unsubscribe();
     }, [pathname, router, initialized]);
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = async (termsAcceptedAt?: string) => {
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+            const token = await result.user.getIdToken();
+            await syncUserWithBackend(token, termsAcceptedAt);
             setCookie('auth_session', 'true'); // Set cookie
             toast.success('¡Bienvenido de vuelta!');
             // Route guard will handle redirect
@@ -128,10 +131,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     };
 
-    const signInWithFacebook = async () => {
+    const signInWithFacebook = async (termsAcceptedAt?: string) => {
         try {
             const provider = new FacebookAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+            const token = await result.user.getIdToken();
+            await syncUserWithBackend(token, termsAcceptedAt);
             setCookie('auth_session', 'true'); // Set cookie
             toast.success('¡Bienvenido de vuelta!');
             // Route guard will handle redirect

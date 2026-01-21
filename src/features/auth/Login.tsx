@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, Lock, ArrowRight, Zap, Shield, Accessibility } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
 import { Logo } from "@/components/ui/Logo";
+import { LegalModal } from "@/components/modals/legal-modal";
 
 interface LoginProps {
     onSwitchToRegister?: () => void;
@@ -248,12 +249,16 @@ export default function Login({ onSwitchToRegister, isTransitioning = false }: L
 
                     {/* Helper Links */}
                     <div className="mt-6 flex justify-center gap-6 text-xs text-gray-500">
-                        <a className="hover:text-gray-300 transition-colors" href="#">
-                            Política de Privacidad
-                        </a>
-                        <a className="hover:text-gray-300 transition-colors" href="#">
-                            Términos de Servicio
-                        </a>
+                        <LegalModal>
+                            <span className="hover:text-gray-300 transition-colors cursor-pointer">
+                                Política de Privacidad
+                            </span>
+                        </LegalModal>
+                        <LegalModal>
+                            <span className="hover:text-gray-300 transition-colors cursor-pointer">
+                                Términos de Servicio
+                            </span>
+                        </LegalModal>
                     </div>
                 </div>
             </motion.div>
