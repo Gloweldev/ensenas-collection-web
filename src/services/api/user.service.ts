@@ -15,6 +15,7 @@ export interface UserProfile {
     gender?: string;
     onboardingCompleted: boolean;
     lastLoginAt?: string;
+    role?: string;
     createdAt: string;
 }
 

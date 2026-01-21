@@ -15,6 +15,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import { Logo } from "@/components/ui/Logo";
+import { UserMenu } from "@/components/ui/UserMenu";
 
 interface MainLayoutProps {
     children: ReactNode;
@@ -100,9 +101,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6324eb] to-purple-600 border-2 border-[#6324eb]/30 flex items-center justify-center text-white font-bold">
-                        A
-                    </div>
+                    <UserMenu initial="A" className="w-10 h-10" />
                 </div>
             </header>
 
@@ -115,9 +114,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                         <Logo width={120} height={35} />
                     </Link>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#6324eb] to-purple-600 border-2 border-[#6324eb]/30 flex items-center justify-center text-white font-bold text-sm">
-                    A
-                </div>
+                <UserMenu initial="A" className="w-9 h-9 text-sm" />
             </div>
 
             {/* Page Content */}
